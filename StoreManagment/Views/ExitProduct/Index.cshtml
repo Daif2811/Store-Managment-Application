@@ -1,0 +1,68 @@
+﻿@model IEnumerable<StoreManagement.Models.ExitProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .head {
+        color: white;
+        background-color: rgb(65, 6, 104);
+        text-align: center;
+        margin-top: 30px;
+        padding: 15px;
+        border-radius: 30px;
+    }
+</style>
+
+<h2 class="head">All Exit Products</h2>
+
+<p>
+    @Html.ActionLink("Exit A Product", "Create" , null ,  new { @class = "btn btn-success" })
+</p>
+<div style="min-height:360px;">
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EntryProduct.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExitDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Count)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EntryProduct.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExitDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ExitProductId }, new { @class = "btn btn-warning" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ExitProductId }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ExitProductId }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
+
+</div>
+
+<p>
+    @Html.ActionLink("Back To Control Panel", "ControlPanel", "Home", null, new { @class = "btn btn-primary" })
+</p>

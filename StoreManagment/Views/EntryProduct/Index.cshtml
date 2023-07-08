@@ -1,0 +1,95 @@
+﻿@model IEnumerable<StoreManagement.Models.EntryProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .head {
+        color: white;
+        background-color: rgb(65, 6, 104);
+        text-align: center;
+        margin-top: 30px;
+        padding: 15px;
+        border-radius: 30px;
+    }
+</style>
+<h2 class="head">Store Balance</h2>
+
+<p>
+    @Html.ActionLink("Enter New Product", "Create", null, new { @class = "btn btn-success" })
+</p>
+<div style="min-height:360px;">
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Damaged)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Count)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Count > 0)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Damaged)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserName)
+                </td>
+                <td>
+                    <a href="~/ExitProduct/ExitFromProducts/@item.EntryProductId" class="btn btn-success">Exit</a> |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EntryProductId }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EntryProductId }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EntryProductId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+</div>
+
+<p>
+    @Html.ActionLink("Back To Control Panel", "ControlPanel", "Home", null, new { @class = "btn btn-primary" })
+</p>

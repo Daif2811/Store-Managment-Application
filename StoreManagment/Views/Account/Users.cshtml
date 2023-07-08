@@ -1,0 +1,60 @@
+﻿@model IEnumerable<StoreManagment.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<style>
+    .head {
+        color: white;
+        background-color: rgb(65, 6, 104);
+        text-align: center;
+        margin-top: 30px;
+        padding: 15px;
+        border-radius: 30px;
+    }
+</style>
+
+<h2 class="head">All Users</h2>
+
+<p>
+    @Html.ActionLink("Create New Admin", "RegisterByAdmin" ,null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+         <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserType)
+        </td>
+        <td>
+            <a href="~/Account/DeleteUser/@item.Id" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+}
+
+</table>
+
+<hr />
+<div>
+    <a href="~/Home/ControlPanel" class="btn btn-primary">Back To Control Panel</a>
+</div>

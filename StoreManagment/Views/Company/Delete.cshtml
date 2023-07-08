@@ -1,0 +1,49 @@
+﻿@model StoreManagement.Models.Company
+
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+    .head {
+        color: white;
+        background-color: rgb(65, 6, 104);
+        text-align: center;
+        margin-top: 30px;
+        padding: 15px;
+        border-radius: 30px;
+    }
+</style>
+
+<h2 class="head">Delete Company</h2>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Company</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyEmail)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back To Companies", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+</div>

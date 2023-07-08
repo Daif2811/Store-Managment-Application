@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNet.Identity
+@using StoreManagment.Models
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        var db = new ApplicationDbContext();
+        var userId = User.Identity.GetUserId();
+        var currentUser = db.Users.Where(a => a.Id == userId).SingleOrDefault();
+
+
+        @Html.AntiForgeryToken()
+
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <strong>Welcome @currentUser.UserName</strong>
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>
+                        <div class="navbar-user">
+                            <div class="row">
+                                <div class="col-lg-8" style="color: black;">
+
+                                    <p style="color: white; background-color: rgb(65, 6, 104); padding:9px; text-align:center;">
+        
+                                        <strong>@currentUser.UserName</strong>
+                                    </p>
+                                    <p style="color: white; background-color: rgb(65, 6, 104); padding:9px; text-align:center;">
+                                        <strong>@currentUser.Email</strong>
+                                    </p>
+                                    @if (currentUser.UserType == "Admins")
+                                    {
+                                        <a href="~/Home/ControlPanel" class="btn btn-block btn-success">Control Panel</a>
+                                        
+
+                                    }
+
+                                    else if (currentUser.UserType == "Customers")
+                                    {
+                                        <a href="~/EntryProduct/MyProducts" class="btn btn-block btn-success">My Products In Store</a>
+                                        <a href="~/EntryProduct/MyOutProducts" class="btn btn-block btn-primary">My Out Products</a>
+                                    }
+
+                                    <a href="~/Account/EditProfile" class="btn btn-block btn-warning">Manage Your Profile</a>
+                                </div>
+                                <div class="col-lg-4">
+                                    <p>
+                                        <span class="glyphicon glyphicon-user img-size"></span>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-block btn-danger">Log Out</a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

@@ -1,0 +1,61 @@
+﻿@model StoreManagement.Models.ExitProduct
+
+@{
+    ViewBag.Title = "ExitFromProducts";
+}
+
+<style>
+    .head {
+        color: white;
+        background-color: rgb(65, 6, 104);
+        text-align: center;
+        margin-top: 30px;
+        padding: 15px;
+        border-radius: 30px;
+    }
+</style>
+<h2 class="head">Exit A Product</h2>
+
+<div style="min-height:360px;">
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        <h3 style="color:red;">
+            @ViewBag.Error
+        </h3>
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Count, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Count, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+<br/>
+
+<div>
+    @Html.ActionLink("Back To Exit Products", "Index" , null , new { @class = "btn btn-primary" }) | 
+    @Html.ActionLink("Back To Store Balance", "Index","EntryProduct", null, new { @class = "btn btn-info" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

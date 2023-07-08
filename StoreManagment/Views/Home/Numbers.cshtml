@@ -1,0 +1,103 @@
+﻿@using StoreManagment.Models
+@{
+    ViewBag.Title = "Numbers";
+}
+
+@{ 
+    var db = new ApplicationDbContext();
+   
+}
+
+<style>
+    .aa {
+        width: 100%;
+        height: 35px;
+        border: 1px solid black;
+        cursor: pointer;
+        background-color: rgb(65, 6, 104);
+        color: #fff;
+        border-radius: 20px;
+        transition: 0.5s;
+        color: white;
+        margin-top: 20px;
+        text-decoration: none;
+        padding-bottom : 15px;
+    }
+
+    .aa:hover {
+            color: white;
+            text-decoration: none;
+            background-color: #be17b1;
+            letter-spacing: 1px;
+        }
+</style>
+
+
+<h2 class="text-center">Numbers</h2>
+
+
+<div style="min-height:360px;">
+    <div class="row">
+        
+        <div class="col-md-4">
+            <a href="~/EntryHistory/Index" class="btn btn-block aa">All Entered Products</a>
+            <br />
+            <div style="text-align:center;">
+                @ViewBag.Entered : Products
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+    <a href="~/ExitProduct/Index" class="btn btn-block aa">All Exit Products</a>
+    <br />
+    <div style="text-align:center;">
+        @ViewBag.Exit : Products
+    </div>
+</div>
+
+        <div class="col-md-4">
+            <a href="~/EntryProduct/Index" class="btn btn-block aa">Store Balance</a>
+            <br />
+            <div style="text-align:center;">
+                @ViewBag.Balance : Products
+            </div>
+        </div>
+    </div>
+    <br /><hr /><br />
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <a href="~/EntryHistory/Index" class="btn btn-block aa">All Damaged Products</a>
+            <br />
+            <div style="text-align:center;">
+                @ViewBag.Damaged : Products
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <a href="~/Category/Index" class="btn btn-block aa">All Categories</a>
+            <br />
+            <div style="text-align:center;">
+                @db.Categories.Count() : Categories
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <a href="~/Company/Index" class="btn btn-block aa">All Company</a>
+            <br />
+            <div style="text-align:center;">
+                @db.Companies.Count() : Companies
+            </div>
+        </div>
+
+
+        </div>
+    </div>
+<br /><hr />
+
+    <p>
+        @Html.ActionLink("Back To Control Panel", "ControlPanel", "Home", null, new { @class = "btn btn-primary" })
+    </p>
